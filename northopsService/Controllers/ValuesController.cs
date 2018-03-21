@@ -7,7 +7,6 @@ namespace northopsService.Controllers
 {
     // Use the MobileAppController attribute for each ApiController you want to use  
     // from your mobile clients 
-    [MobileAppController]
     [Authorize]
     public class ValuesController : ApiController
     {

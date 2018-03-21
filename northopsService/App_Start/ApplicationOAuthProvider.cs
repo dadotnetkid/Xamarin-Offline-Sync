@@ -109,7 +109,7 @@ namespace northopsService.App_Start
         }
         public static string GenerateJWToken(string UserName)
         {
-            var db = new NorthopsDbEntities();
+            var db = new NorthopsContext ();
             var signingKey = Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");
 
             //Environment.GetEnvironmentVariable("WEBSITE_AUTH_SIGNING_KEY");

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
-
+using System.ComponentModel.DataAnnotations.Schema;
 namespace northopsService.Models
 {
     public partial class User : IUser<string>
@@ -25,7 +25,7 @@ namespace northopsService.Models
             return userIdentity;
         }
 
-
+        [NotMapped]
         public string FullName
         {
             get
@@ -33,10 +33,10 @@ namespace northopsService.Models
                 string dspFirstName = string.IsNullOrWhiteSpace(this.FirstName) ? "" : this.FirstName;
                 string dspLastName = string.IsNullOrWhiteSpace(this.LastName) ? "" : this.LastName;
 
-                return string.Format("{0} {1}", dspFirstName, dspLastName);
+                return dspFirstName + " " + dspLastName;
             }
         }
-
-
+        [NotMapped]
+        public string Password { get; set; }
     }
 }

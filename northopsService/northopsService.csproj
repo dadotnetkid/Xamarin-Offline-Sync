@@ -46,11 +46,13 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50782</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:50782/</IISUrl>
+          <IISUrl>http://192.168.254.102:50782/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://192.168.254.102:50782/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
@@ -103,6 +105,7 @@
     <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Http">
@@ -162,6 +165,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DataObjects\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\ApplicationOAuthProvider.cs" />
@@ -169,64 +173,30 @@
     <Compile Include="App_Start\Startup.MobileApp.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
-    <Compile Include="DataObjects\TodoItem.cs" />
-    <Compile Include="Models\AddressStateProvince.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\AddressTownCity.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ContextDb.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContextDb.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ContextDb.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\ContextDb.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ContextDb.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\C__MigrationHistory.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\northopsContext.cs" />
-    <Compile Include="Models\User.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserClaim.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\UserLogin.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\AddressStateProvince.cs" />
+    <Compile Include="Models\AddressTownCity.cs" />
+    <Compile Include="Models\NorthOps.cs" />
+    <Compile Include="Models\TodoItemPartial.cs" />
+    <Compile Include="Models\northopsServiceContext.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\UserClaim.cs" />
+    <Compile Include="Models\UserLogin.cs" />
     <Compile Include="Models\UserPartial.cs" />
-    <Compile Include="Models\UserRole.cs">
-      <DependentUpon>ContextDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\IUserStore.cs" />
+    <Compile Include="Models\UserRole.cs" />
     <Compile Include="Models\UserStore.cs" />
+    <Compile Include="Services\GenericRepository.cs" />
+    <Compile Include="Services\UnitOfWork.cs" />
+    <Compile Include="Services\UnitOfWorkExtension.cs" />
+    <Compile Include="Services\UserManagerExtension.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\ContextDb.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ContextDb.edmx</DependentUpon>
-      <LastGenOutput>ContextDb.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\ContextDb.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ContextDb.edmx</DependentUpon>
-      <LastGenOutput>ContextDb.cs</LastGenOutput>
-    </Content>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -242,13 +212,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <EntityDeploy Include="Models\ContextDb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ContextDb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\ContextDb.edmx.diagram">
-      <DependentUpon>ContextDb.edmx</DependentUpon>
-    </Content>
     <None Include="Properties\PublishProfiles\northops - FTP.pubxml" />
     <None Include="Properties\PublishProfiles\northops - Web Deploy.pubxml" />
   </ItemGroup>

@@ -7,7 +7,6 @@ using Microsoft.Azure.Mobile.Server;
 using Microsoft.Azure.Mobile.Server.Authentication;
 using Microsoft.Azure.Mobile.Server.Config;
 using northopsService.App_Start;
-using northopsService.DataObjects;
 using northopsService.Models;
 using Owin;
 
@@ -23,11 +22,12 @@ namespace northopsService
             config.EnableSystemDiagnosticsTracing();
 
             new MobileAppConfiguration()
-                .AddTablesWithEntityFramework()
+                .UseDefaultConfiguration()
+                //.AddTablesWithEntityFramework()
                 .ApplyTo(config);
 
             // Use Entity Framework Code First to create database tables based on your DbContext
-            Database.SetInitializer(new northopsInitializer());
+            //Database.SetInitializer(new northopsInitializer());
 
             // To prevent Entity Framework from modifying your database schema, use a null database initializer
             // Database.SetInitializer<northopsContext>(null);
@@ -59,19 +59,19 @@ namespace northopsService
         }
     }
 
-    public class northopsInitializer : CreateDatabaseIfNotExists<northopsContext>
+    public class northopsInitializer : CreateDatabaseIfNotExists<NorthopsContext>
     {
-        protected override void Seed(northopsContext context)
+        protected override void Seed(NorthopsContext context)
         {
-            List<TodoItem> todoItems = new List<TodoItem>
+            List<Models.TodoItem> todoItems = new List<Models.TodoItem>
             {
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "First item", Complete = false },
-                new TodoItem { Id = Guid.NewGuid().ToString(), Text = "Second item", Complete = false },
+               /* new Models.TodoItem { Id = Guid.NewGuid().ToString(), text = "First item", complete = false },
+                new Models.TodoItem { Id = Guid.NewGuid().ToString(), text = "Second item", complete = false },*/
             };
 
-            foreach (TodoItem todoItem in todoItems)
+            foreach (Models.TodoItem todoItem in todoItems)
             {
-                context.Set<TodoItem>().Add(todoItem);
+                context.Set<Models.TodoItem>().Add(todoItem);
             }
 
             base.Seed(context);

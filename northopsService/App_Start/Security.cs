@@ -19,7 +19,7 @@ namespace northopsService.App_Start
         }
         public static ApplicationUserManager Create(IdentityFactoryOptions<ApplicationUserManager> options, IOwinContext context)
         {
-            var userStore = new UserStore(context.Get<NorthopsDbEntities>());
+            var userStore = new UserStore(context.Get<NorthopsContext >());
             var userManager = new UserManager<User, string>(userStore);
 
             var manager = new ApplicationUserManager(userStore);
@@ -34,7 +34,7 @@ namespace northopsService.App_Start
             // Configure validation logic for passwords
             manager.PasswordValidator = new PasswordValidator
             {
-                RequiredLength = 6,
+                RequiredLength = 0,
                 RequireNonLetterOrDigit = false,
                 RequireDigit = false,
                 RequireLowercase = false,

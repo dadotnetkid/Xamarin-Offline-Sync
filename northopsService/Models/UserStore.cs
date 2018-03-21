@@ -16,9 +16,10 @@ namespace northopsService.Models
         IUserEmailStore<User, string>, IUserPhoneNumberStore<User, string>, IUserTwoFactorStore<User, string>,
         IUserLockoutStore<User, string>
     {
-        private readonly NorthopsDbEntities db;
 
-        public UserStore(NorthopsDbEntities db)
+        private readonly NorthopsContext db;
+
+        public UserStore(NorthopsContext db)
         {
             if (db == null)
             {
@@ -356,7 +357,7 @@ namespace northopsService.Models
                 throw new ArgumentNullException("user");
             }
 
-            return Task.FromResult(user.EmailConfirmed);
+            return Task.FromResult(user.EmailConfirmed ?? false);
         }
 
         public Task SetEmailAsync(User user, string email)
@@ -400,7 +401,7 @@ namespace northopsService.Models
                 throw new ArgumentNullException("user");
             }
 
-            return Task.FromResult(user.PhoneNumberConfirmed);
+            return Task.FromResult(user.PhoneNumberConfirmed ?? false);
         }
 
         public Task SetPhoneNumberAsync(User user, string phoneNumber)
@@ -434,7 +435,7 @@ namespace northopsService.Models
                 throw new ArgumentNullException("user");
             }
 
-            return Task.FromResult(user.TwoFactorEnabled);
+            return Task.FromResult(user.TwoFactorEnabled ?? false);
         }
 
         public Task SetTwoFactorEnabledAsync(User user, bool enabled)
@@ -457,7 +458,7 @@ namespace northopsService.Models
                 throw new ArgumentNullException("user");
             }
 
-            return Task.FromResult(user.AccessFailedCount);
+            return Task.FromResult(user.AccessFailedCount.Value);
         }
 
         public Task<bool> GetLockoutEnabledAsync(User user)
@@ -467,7 +468,7 @@ namespace northopsService.Models
                 throw new ArgumentNullException("user");
             }
 
-            return Task.FromResult(user.LockoutEnabled);
+            return Task.FromResult(user.LockoutEnabled ?? false);
         }
 
         public Task<DateTimeOffset> GetLockoutEndDateAsync(User user)
@@ -491,7 +492,7 @@ namespace northopsService.Models
             }
 
             user.AccessFailedCount++;
-            return Task.FromResult(user.AccessFailedCount);
+            return Task.FromResult(user.AccessFailedCount.Value);
         }
 
         public Task ResetAccessFailedCountAsync(User user)
@@ -545,4 +546,13 @@ namespace northopsService.Models
 
 
     }
+    public partial class NorthopsContext
+    {
+        public static NorthopsContext Create()
+
+        {
+            return new NorthopsContext();
+        }
+    }
+
 }

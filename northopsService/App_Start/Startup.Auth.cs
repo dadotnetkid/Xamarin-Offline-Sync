@@ -21,7 +21,7 @@ namespace northopsService
         // For more information on configuring authentication, please visit https://go.microsoft.com/fwlink/?LinkId=301864
         public static void ConfigureAuthWebApi(IAppBuilder app)
         {
-            app.CreatePerOwinContext(NorthopsDbEntities.Create);
+            app.CreatePerOwinContext(NorthopsContext .Create);
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);
             app.CreatePerOwinContext<ApplicationSignInManager>(ApplicationSignInManager.Create);
             //app.CreatePerOwinContext<ApplicationRoleManager>(ApplicationRoleManager.Create);
