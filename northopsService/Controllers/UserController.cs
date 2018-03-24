@@ -58,14 +58,10 @@ namespace northopsService.Controllers
         public async Task<IHttpActionResult> PostUser(User item)
         {
 
-#if DEBUG
             item.Id = Guid.NewGuid().ToString();
-            item.Email = "test@gmail.com";
-            item.UserName = "test@gmail.com";
-            item.Password = "123321";
+            item.UserName = item.Email.Split('@')[0];
             item.CreatedAt = DateTime.Now;
             item.UpdatedAt = DateTime.Now;
-#endif
             var user = await userManager.CreateAsync(item, item.Password);
             return CreatedAtRoute("Tables", new { id = Guid.NewGuid().ToByteArray() }, user);
         }

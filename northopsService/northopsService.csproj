@@ -107,6 +107,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.IdentityModel" />
     <Reference Include="System.Security" />
     <Reference Include="System.Web.Http">
       <SpecificVersion>False</SpecificVersion>
@@ -174,9 +175,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AuthenticationController.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
-    <Compile Include="Controllers\TodoItemController.cs" />
     <Compile Include="Controllers\UserController.cs" />
-    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Models\AddressStateProvince.cs" />
     <Compile Include="Models\AddressTownCity.cs" />
     <Compile Include="Models\NorthOps.cs" />

@@ -25,7 +25,6 @@ namespace northopsService.Models
             return userIdentity;
         }
 
-        [NotMapped]
         public string FullName
         {
             get
